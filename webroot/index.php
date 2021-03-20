@@ -14,7 +14,7 @@
  * @since         0.2.9
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  */
-
+echo('aaa');die;
 // Check platform requirements
 require dirname(__DIR__) . '/config/requirements.php';
 
@@ -28,7 +28,6 @@ if (PHP_SAPI === 'cli-server') {
         return false;
     }
 }
-echo('aaa');die;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use App\Application;
