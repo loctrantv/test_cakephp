@@ -7,7 +7,6 @@ use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
 
-var_dump('aaa');die;
 return [
     /*
      * Debug Level:
