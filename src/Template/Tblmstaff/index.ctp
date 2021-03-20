@@ -49,7 +49,7 @@
             <tr>
                 <td><?= h($tblmstaff->StaffID) ?></td>
                 <td><?= h($tblmstaff->StaffName) ?></td>
-                <td><?= h($tblmstaff->TrialEntryDate) ?></td>
+                <td><?= date('d-m-Y',strtotime($tblmstaff->TrialEntryDate)) ?></td>
                 <td><?= date('l',strtotime($tblmstaff->TrialEntryDate)) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $tblmstaff->StaffID]) ?>
