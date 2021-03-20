@@ -28,6 +28,7 @@ if (PHP_SAPI === 'cli-server') {
         return false;
     }
 }
+echo('aaa');die;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use App\Application;
