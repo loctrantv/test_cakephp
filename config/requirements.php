@@ -28,6 +28,7 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
  * You can remove this if you are confident you have intl installed.
  */
 if (!extension_loaded('intl')) {
+    echo('intl');die;
     trigger_error('You must enable the intl extension to use CakePHP.' . PHP_EOL, E_USER_ERROR);
 }
 
@@ -35,6 +36,7 @@ if (!extension_loaded('intl')) {
  * You can remove this if you are confident you have proper version of intl.
  */
 if (version_compare(INTL_ICU_VERSION, '50.1', '<')) {
+    echo('aaa');die;
     trigger_error('ICU >= 50.1 is needed to use CakePHP. Please update the `libicu` package of your system.' . PHP_EOL, E_USER_ERROR);
 }
 

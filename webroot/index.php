@@ -16,7 +16,6 @@
  */
 // Check platform requirements
 require dirname(__DIR__) . '/config/requirements.php';
-echo('aaa');die;
 
 // For built-in server
 if (PHP_SAPI === 'cli-server') {
