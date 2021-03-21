@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\View\View;
 
 /**
  * Tblmstaff Controller
@@ -26,9 +27,31 @@ class TblmstaffController extends AppController
         } else {
             $query = $this->Tblmstaff;
         }
-        $tblmstaff = $this->paginate($query);
 
+        $tblmstaff = $this->paginate($query);
         $this->set(compact('tblmstaff'));
+    }
+
+    public function sendPdf()
+    {
+        $this->render(View::TYPE_TEMPLATE);
+        if ($this->request->is('post')) {
+            $from = $this->request->getQuery('from');
+            $to = $this->request->getQuery('to');
+            if (!empty($to) && !empty($from)) {
+                $query = $this->Tblmstaff->find()->where(['DATEDIFF( NOW( ) , `TrialEntryDate` ) >=' => $from, 'DATEDIFF( NOW( ) , `TrialEntryDate` ) <' => $to]);
+                $CakePdf = new \CakePdf\Pdf\CakePdf();
+                $CakePdf->template('staff', '');
+                $CakePdf->viewVars(['tblmstaff' => $query->all()]);
+                $pdf = $CakePdf->output();
+            }
+        }
+
+
+        header("Content-Type: application/force-download");
+        header("Content-type: application/pdf");
+        header("Content-Disposition: inline; filename=test.pdf;");
+        echo $pdf;
     }
 
     /**
@@ -43,7 +66,6 @@ class TblmstaffController extends AppController
         $tblmstaff = $this->Tblmstaff->get($id, [
             'contain' => [],
         ]);
-
         $this->set('tblmstaff', $tblmstaff);
     }
 

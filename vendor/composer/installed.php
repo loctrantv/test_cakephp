@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '0d9864431e54f400e0b9e40a590c0283504da03d',
+    'reference' => '6d3daa77e4bca4e300dd63bd47d7e83331f9ff37',
     'name' => 'cakephp/app',
   ),
   'versions' => 
@@ -54,7 +54,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '0d9864431e54f400e0b9e40a590c0283504da03d',
+      'reference' => '6d3daa77e4bca4e300dd63bd47d7e83331f9ff37',
     ),
     'cakephp/bake' => 
     array (
@@ -210,6 +210,13 @@
         0 => '3.9.8',
       ),
     ),
+    'ceeram/cakepdf' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '3.5.3',
+      ),
+    ),
     'composer/ca-bundle' => 
     array (
       'pretty_version' => '1.2.9',
@@ -263,6 +270,15 @@
       array (
       ),
       'reference' => '8f8a6e48c5ecb0f991c2fdcf5f154a47d85f9ffd',
+    ),
+    'friendsofcake/cakepdf' => 
+    array (
+      'pretty_version' => '3.5.3',
+      'version' => '3.5.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9184b6f6213446b2c1ac355410e7ea2867c7057d',
     ),
     'jasny/twig-extensions' => 
     array (
@@ -335,6 +351,24 @@
       array (
       ),
       'reference' => '9841e3c46f5bd0739b53aed8ac677fa712943df7',
+    ),
+    'mpdf/mpdf' => 
+    array (
+      'pretty_version' => 'v8.0.10',
+      'version' => '8.0.10.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1333a962cd2f7ae1a127b7534b7734b58179186f',
+    ),
+    'myclabs/deep-copy' => 
+    array (
+      'pretty_version' => '1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e',
     ),
     'nikic/php-parser' => 
     array (
@@ -430,6 +464,15 @@
       array (
       ),
       'reference' => '8674b1d84ffb47cc59a101f5d5a3b61e87d23796',
+    ),
+    'setasign/fpdi' => 
+    array (
+      'pretty_version' => 'v2.3.6',
+      'version' => '2.3.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6231e315f73e4f62d72b73f3d6d78ff0eed93c31',
     ),
     'squizlabs/php_codesniffer' => 
     array (

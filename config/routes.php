@@ -67,7 +67,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $routes->connect('/staff/*', ['controller' => 'Tblmstaff', 'action' => 'add','view','delete']);
+    $routes->connect('/staff/*', ['controller' => 'Tblmstaff', 'action' => 'add','view','delete','']);
+    $routes->connect('/staff/send-pdf', ['controller' => 'Tblmstaff', 'action' => 'sendPdf']);
 
     /*
      * Connect catchall routes for all controllers.
@@ -90,7 +91,10 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->fallbacks(DashedRoute::class);
 });
-
+Router::scope('/', function (\Cake\Routing\RouteBuilder $routes) {
+    $routes->setExtensions(['pdf']);
+    // ...
+});
 /*
  * If you need a different set of middleware or none at all,
  * open new scope and define routes there.

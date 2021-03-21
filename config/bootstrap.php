@@ -153,7 +153,17 @@ TransportFactory::setConfig(Configure::consume('EmailTransport'));
 Email::setConfig(Configure::consume('Email'));
 Log::setConfig(Configure::consume('Log'));
 Security::setSalt(Configure::consume('Security.salt'));
-
+Configure::write('CakePdf', [
+    'engine' => 'CakePdf.Mpdf',
+    'margin' => [
+        'bottom' => 15,
+        'left' => 1,
+        'right' => 30,
+        'top' => 45
+    ],
+    'orientation' => 'portrait',
+    'download' => true
+]);
 /*
  * The default crypto extension in 3.0 is OpenSSL.
  * If you are migrating from 2.x uncomment this code to

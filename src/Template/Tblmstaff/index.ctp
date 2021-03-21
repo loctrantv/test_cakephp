@@ -30,7 +30,7 @@
         <?= $this->Form->control('to',['placeholder' => 'Ex: 720','value' => $this->request->getQuery('to')]) ?>
         <div class="button-block">
         <?= $this->Form->button('Search',['type' => 'submit']) ?>
-        <?= $this->Form->button('Send to your email',['type' => 'button']) ?>
+        <?= $this->Form->button('Send to your email',['type' => 'button','id' => 'emailSend']) ?>
         </div>
     </div>
     <?= $this->Form->end() ?>
@@ -70,3 +70,24 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
+<?php
+echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js', array('inline' => false));
+?>
+<script>
+    $(document).ready(function () {
+        $('#emailSend').click(function () {
+            $.ajax({
+                'url' : '/staff/send-pdf',
+                'method': 'POST',
+                'dataType': 'FormData',
+                'data': $('#search-form').serialize(),
+                success: function () {
+
+                },
+                error: function () {
+
+                }
+            });
+        });
+    });
+</script>
