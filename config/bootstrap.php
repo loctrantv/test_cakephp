@@ -159,7 +159,7 @@ Configure::write('CakePdf', [
         'options' => [
             'mode' => 'utf-8',
             'default_font_size' => 12,
-//            'default_font' => 'cid0jp'
+            'default_font' => 'unbatang'
         ]
     ],
     'margin' => [

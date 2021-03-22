@@ -4,18 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style>
-        body {
-            background: #fff;
-            color: #222;
-            cursor: auto;
-            font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            line-height: 1.5;
-            margin: 0;
-            padding: 0;
-            position: relative;
-        }
         td, th {
             border: 1px solid #dddddd;
             text-align: left;
