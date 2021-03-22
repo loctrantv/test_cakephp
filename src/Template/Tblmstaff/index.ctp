@@ -66,7 +66,7 @@
                         'Saturday' => '土',
                         'Sunday' => '日'
                     ];
-                    echo $dayOfWeek.' ('.$dayOfWeekJav[$dayOfWeek].')';
+                    echo $dayOfWeekJav[$dayOfWeek];
                     ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $tblmstaff->StaffID]) ?>

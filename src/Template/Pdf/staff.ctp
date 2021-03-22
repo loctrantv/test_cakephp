@@ -45,7 +45,7 @@
                     'Saturday' => '土',
                     'Sunday' => '日'
                 ];
-                echo $dayOfWeek.' ('.$dayOfWeekJav[$dayOfWeek].')';
+                echo $dayOfWeekJav[$dayOfWeek];
                 ?></td>
         </tr>
     <?php endforeach; ?>
