@@ -33,10 +33,11 @@ class TblmstaffController extends AppController
                     if ($query->all()->count() > 0) {
                         $fileName = 'List_Staff_Working_'.$from.'_'.$to.'_days_'.time().'.pdf';
                         if (!empty($data['from'])) {
-                            if ($this->sendPdf($query->all(),$email,$fileName)) {
+                            $sent =$this->sendPdf($query->all(),$email,$fileName);
+                            if ($sent) {
                                 $this->Flash->success('This was successful');
                             } else {
-                                $this->Flash->error('This was not successful');
+                                $this->Flash->error('This was not successful'.$sent);
                             }
                         } else {
                             $this->Flash->error('Please input your email to send file');
@@ -77,7 +78,7 @@ class TblmstaffController extends AppController
 
             return true;
         } catch (\Exception $e) {
-            return false;
+            return $e->getMessage();
         }
     }
 
