@@ -27,7 +27,7 @@ class TblmstaffController extends AppController
             $to = (int)$data['to'];
             $from = (int)$data['from'];
             $email = $data['email'];
-            if (!empty($to) && !empty($from)) {
+            if ($to >= 0 && $from >= 0) {
                 if ($from <= $to) {
                     $query = $this->Tblmstaff->find()->contain(['tblMStaff2'])->where(['DATEDIFF( NOW( ) , `TrialEntryDate` ) >=' => $from, 'DATEDIFF( NOW( ) , `TrialEntryDate` ) <' => $to]);
                     if ($query->all()->count() > 0) {
@@ -48,7 +48,7 @@ class TblmstaffController extends AppController
                     }
                 } else {
                     $this->Flash->error('Please input "From" value less than "To" value !');
-                    $query = $this->Tblmstaff;
+                    $query = $this->Tblmstaff->find()->where('1 = -1');
                 }
 
             } else {
