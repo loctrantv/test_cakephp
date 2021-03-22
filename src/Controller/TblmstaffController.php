@@ -71,7 +71,7 @@ class TblmstaffController extends AppController
         $pdf = $CakePdf->write(APP . 'files' . DS . $fileName);
         try {
             $email = new Email();
-            $email->setTo('loctrantvu2011@gmail.com');
+            $email->setTo($emailUser);
             $email->setSubject('Your Staff List');
             $email->addAttachments(APP . 'files' . DS . $fileName);
             $email->send('Dear User, Please see attachment file !');
