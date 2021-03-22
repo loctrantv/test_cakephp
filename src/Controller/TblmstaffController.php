@@ -55,7 +55,7 @@ class TblmstaffController extends AppController
                 $query = $this->Tblmstaff;
             }
         } else {
-            $query = $this->Tblmstaff->find());
+            $query = $this->Tblmstaff->find();
         }
 
         $tblmstaff = $this->paginate($query);
