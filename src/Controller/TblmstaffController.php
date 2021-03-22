@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Tblmstaff;
+use Cake\Mailer\Email;
 use Cake\View\View;
 
 /**
@@ -20,38 +22,63 @@ class TblmstaffController extends AppController
      */
     public function index()
     {
-        $from = $this->request->getQuery('from');
-        $to = $this->request->getQuery('to');
-        if (!empty($to) && !empty($from)) {
-            $query = $this->Tblmstaff->find()->where(['DATEDIFF( NOW( ) , `TrialEntryDate` ) >=' => $from, 'DATEDIFF( NOW( ) , `TrialEntryDate` ) <' => $to]);
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $to = (int)$data['to'];
+            $from = (int)$data['from'];
+            $email = $data['email'];
+            if (!empty($to) && !empty($from)) {
+                if ($from <= $to) {
+                    $query = $this->Tblmstaff->find()->contain(['Tblmstaff2'])->where(['DATEDIFF( NOW( ) , `TrialEntryDate` ) >=' => $from, 'DATEDIFF( NOW( ) , `TrialEntryDate` ) <' => $to]);
+                    if ($query->all()->count() > 0) {
+                        $fileName = 'List_Staff_Working_'.$from.'_'.$to.'_days_'.time().'.pdf';
+                        if (!empty($data['from'])) {
+                            if ($this->sendPdf($query->all(),$email,$fileName)) {
+                                $this->Flash->success('This was successful');
+                            } else {
+                                $this->Flash->error('This was not successful');
+                            }
+                        } else {
+                            $this->Flash->error('Please input your email to send file');
+                        }
+
+                    } else {
+                        $this->Flash->error('Do not have any record match with your input');
+                    }
+                } else {
+                    $this->Flash->error('Please input "From" value less than "To" value !');
+                    $query = $this->Tblmstaff;
+                }
+
+            } else {
+                $this->Flash->error('Please input your range day to send staff list to your email');
+                $query = $this->Tblmstaff;
+            }
         } else {
-            $query = $this->Tblmstaff;
+            $query = $this->Tblmstaff->find()->contain(['Tblmstaff2']);
         }
 
         $tblmstaff = $this->paginate($query);
         $this->set(compact('tblmstaff'));
     }
 
-    public function sendPdf()
+    public function sendPdf($data, $emailUser, $fileName)
     {
-        $this->render(View::TYPE_TEMPLATE);
-        if ($this->request->is('post')) {
-            $from = $this->request->getQuery('from');
-            $to = $this->request->getQuery('to');
-            if (!empty($to) && !empty($from)) {
-                $query = $this->Tblmstaff->find()->where(['DATEDIFF( NOW( ) , `TrialEntryDate` ) >=' => $from, 'DATEDIFF( NOW( ) , `TrialEntryDate` ) <' => $to]);
-                $CakePdf = new \CakePdf\Pdf\CakePdf();
-                $CakePdf->template('staff', '');
-                $CakePdf->viewVars(['tblmstaff' => $query->all()]);
-                $pdf = $CakePdf->output();
-            }
+        $CakePdf = new \CakePdf\Pdf\CakePdf();
+        $CakePdf->template('staff', '');
+        $CakePdf->viewVars(['tblmstaff' => $data]);
+        $pdf = $CakePdf->write(APP . 'files' . DS . $fileName);
+        try {
+            $email = new Email();
+            $email->setTo('loctrantvu2011@gmail.com');
+            $email->setSubject('Your Staff List');
+            $email->addAttachments(APP . 'files' . DS . $fileName);
+            $email->send('Dear User, Please see attachment file !');
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
         }
-
-
-        header("Content-Type: application/force-download");
-        header("Content-type: application/pdf");
-        header("Content-Disposition: inline; filename=test.pdf;");
-        echo $pdf;
     }
 
     /**

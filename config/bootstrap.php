@@ -154,7 +154,14 @@ Email::setConfig(Configure::consume('Email'));
 Log::setConfig(Configure::consume('Log'));
 Security::setSalt(Configure::consume('Security.salt'));
 Configure::write('CakePdf', [
-    'engine' => 'CakePdf.Mpdf',
+    'engine' => [
+        'className' => 'CakePdf.Mpdf',
+        'options' => [
+            'mode' => 'utf-8',
+            'default_font_size' => 12,
+//            'default_font' => 'cid0jp'
+        ]
+    ],
     'margin' => [
         'bottom' => 15,
         'left' => 1,
@@ -163,6 +170,15 @@ Configure::write('CakePdf', [
     ],
     'orientation' => 'portrait',
     'download' => true
+]);
+
+TransportFactory::setConfig('gmail', [
+    'host' => 'smtp.gmail.com',
+    'port' => 587,
+    'username' => 'loctrantvu2011@gmail.com',
+    'password' => 'dqiyvdltvzuxxfao',
+    'className' => 'Smtp',
+    'tls' => true
 ]);
 /*
  * The default crypto extension in 3.0 is OpenSSL.

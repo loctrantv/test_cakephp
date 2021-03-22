@@ -29,6 +29,9 @@ class TblmstaffTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
+        $this->belongsTo('tblmstaff2')
+            ->setForeignKey('StaffID')
+            ->setJoinType('INNER');
 
         $this->setTable('tblMStaff');
         $this->setDisplayField('StaffID');

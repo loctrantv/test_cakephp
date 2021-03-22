@@ -23,14 +23,16 @@
 </nav>
 <div class="tblmstaff index large-9 medium-8 columns content">
     <h3><?= __('Staff List') ?></h3>
-    <?= $this->Form->create(null,['type' => 'get']) ?>
+    <?= $this->Flash->render('positive') ?>
+    <?= $this->Form->create(null,['type' => 'post']) ?>
     <p>Please input your day range Ex: You want search staffs have working day from 366 days to 720 days </p>
     <div class="search-form">
-        <?= $this->Form->control('from',['placeholder' => 'Ex: 366','value' => $this->request->getQuery('from')]) ?>
-        <?= $this->Form->control('to',['placeholder' => 'Ex: 720','value' => $this->request->getQuery('to')]) ?>
+        <?= $this->Form->control('from',['placeholder' => 'Ex: 366','type' => 'number']) ?>
+        <?= $this->Form->control('to',['placeholder' => 'Ex: 720','type' => 'number']) ?>
+        <?= $this->Form->control('email',['placeholder' => 'youremail@domain.com','type' => 'email']) ?>
         <div class="button-block">
-        <?= $this->Form->button('Search',['type' => 'submit']) ?>
-        <?= $this->Form->button('Send to your email',['type' => 'button','id' => 'emailSend']) ?>
+        <?= $this->Form->button('Submit and Send email',['type' => 'submit']) ?>
+        <a href="/"><?= $this->Form->button('Reset',['type' => 'button']) ?></a>
         </div>
     </div>
     <?= $this->Form->end() ?>
@@ -39,6 +41,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('StaffID','ID') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('StaffName','Name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Email','Email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('TrialEntryDate','Entry Date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('DayOfWeek','Day of Week') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -49,8 +52,22 @@
             <tr>
                 <td><?= h($tblmstaff->StaffID) ?></td>
                 <td><?= h($tblmstaff->StaffName) ?></td>
+                <td><?= h(!empty($tblmstaff->tblmstaff2['Email']) ? $tblmstaff->tblmstaff2['Email'] : '-') ?></td>
                 <td><?= date('d-m-Y',strtotime($tblmstaff->TrialEntryDate)) ?></td>
-                <td><?= date('l',strtotime($tblmstaff->TrialEntryDate)) ?></td>
+                <td><?php
+
+                    $dayOfWeek = date('l',strtotime($tblmstaff->TrialEntryDate));
+                    $dayOfWeekJav = [
+                        'Monday' => '月',
+                        'Tuesday' => '火',
+                        'Wednesday' => '水',
+                        'Thursday' => '木',
+                        'Friday' => '金',
+                        'Saturday' => '土',
+                        'Sunday' => '日'
+                    ];
+                    echo $dayOfWeek.' ('.$dayOfWeekJav[$dayOfWeek].')';
+                    ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $tblmstaff->StaffID]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $tblmstaff->StaffID]) ?>
@@ -70,24 +87,3 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
-<?php
-echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js', array('inline' => false));
-?>
-<script>
-    $(document).ready(function () {
-        $('#emailSend').click(function () {
-            $.ajax({
-                'url' : '/staff/send-pdf',
-                'method': 'POST',
-                'dataType': 'FormData',
-                'data': $('#search-form').serialize(),
-                success: function () {
-
-                },
-                error: function () {
-
-                }
-            });
-        });
-    });
-</script>
