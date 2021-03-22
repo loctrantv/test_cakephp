@@ -29,7 +29,7 @@ class TblmstaffController extends AppController
             $email = $data['email'];
             if (!empty($to) && !empty($from)) {
                 if ($from <= $to) {
-                    $query = $this->Tblmstaff->find()->contain(['tblMStaff2'])->where(['DATEDIFF( NOW( ) , `TrialEntryDate` ) >=' => $from, 'DATEDIFF( NOW( ) , `TrialEntryDate` ) <' => $to]);
+                    $query = $this->Tblmstaff->find()->where(['DATEDIFF( NOW( ) , `TrialEntryDate` ) >=' => $from, 'DATEDIFF( NOW( ) , `TrialEntryDate` ) <' => $to]);
                     if ($query->all()->count() > 0) {
                         $fileName = 'List_Staff_Working_'.$from.'_'.$to.'_days_'.time().'.pdf';
                         if (!empty($data['from'])) {
@@ -55,7 +55,7 @@ class TblmstaffController extends AppController
                 $query = $this->Tblmstaff;
             }
         } else {
-            $query = $this->Tblmstaff->find()->contain(['tblMStaff2']);
+            $query = $this->Tblmstaff->find());
         }
 
         $tblmstaff = $this->paginate($query);
