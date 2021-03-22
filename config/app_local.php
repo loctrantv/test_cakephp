@@ -43,9 +43,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'root',
-            'password' => '',
-            'database' => 'cake_php',
+            'username' => 'nsv_test',
+            'password' => 'MIRa9PJz',
+            'database' => 'nsv_test',
             'log' => true,
             'url' => env('DATABASE_URL', null),
         ],
