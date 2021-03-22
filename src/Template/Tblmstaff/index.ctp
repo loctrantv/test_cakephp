@@ -32,7 +32,7 @@
         <?= $this->Form->control('email',['placeholder' => 'youremail@domain.com','type' => 'email']) ?>
         <div class="button-block">
         <?= $this->Form->button('Submit and Send email',['type' => 'submit']) ?>
-        <a href="/"><?= $this->Form->button('Reset',['type' => 'button']) ?></a>
+        <a href="http://nsv-vietnam.com/test/PG18/"><?= $this->Form->button('Reset',['type' => 'button']) ?></a>
         </div>
     </div>
     <?= $this->Form->end() ?>
