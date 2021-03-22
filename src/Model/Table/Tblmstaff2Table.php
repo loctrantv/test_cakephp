@@ -30,7 +30,7 @@ class Tblmstaff2Table extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('tblmstaff2');
+        $this->setTable('tblMStaff2');
         $this->setDisplayField('StaffID');
         $this->setPrimaryKey('StaffID');
     }
