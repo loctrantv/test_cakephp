@@ -31,7 +31,7 @@
         <tr>
             <td><?= h($tblmstaff->StaffID) ?></td>
             <td><?= h($tblmstaff->StaffName) ?></td>
-            <td><?= h(!empty($tblmstaff->tblmstaff2['Email']) ? $tblmstaff->tblmstaff2['Email'] : '-') ?></td>
+            <td><?= h(!empty($tblmstaff->Tblmstaff2['Email']) ? $tblmstaff->Tblmstaff2['Email'] : '-') ?></td>
             <td><?= date('d-m-Y',strtotime($tblmstaff->TrialEntryDate)) ?></td>
             <td><?php
 
