@@ -29,7 +29,7 @@ class TblmstaffTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
-        $this->belongsTo('tblMStaff2')
+        $this->belongsTo('Tblmstaff2')
             ->setForeignKey('StaffID')
             ->setJoinType('INNER');
 
